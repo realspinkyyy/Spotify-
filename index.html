@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-grow: 1;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #181818;
+            height: 100vh;
+            padding: 30px 20px;
+        }
+        .sidebar .logo {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            color: #b3b3b3;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .sidebar a:hover {
+            background-color: #333;
+            border-radius: 5px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 15px;
+            background-color: #121212;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border: 1px solid #1DB954;
+        }
+        .featured-playlists {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .playlist-card {
+            background-color: #333;
+            padding: 20px;
+            width: 200px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .playlist-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .playlist-card h4 {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #b3b3b3;
+        }
+        .playlist-card p {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+        .now-playing {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #181818;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #333;
+        }
+        .now-playing img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+        .now-playing .song-info {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+        .now-playing .song-info h5 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .now-playing .song-info p {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+        .now-playing .controls button {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .now-playing .controls button:hover {
+            color: white;
+        }
+        .playlist-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        .playlist-header h2 {
+            font-size: 24px;
+        }
+        .playlist-header button {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #1DB954;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .playlist-header button:hover {
+            background-color: #1ed760;
+        }
+        .song-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .song-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .song-list li:hover {
+            background-color: #444;
+        }
+        .song-list .song-title {
+            font-size: 16px;
+        }
+        .song-list .song-artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">Spotify</div>
+            <a href="#">Home</a>
+            <a href="#">Search</a>
+            <a href="#">Your Library</a>
+            <a href="#">Create Playlist</a>
+            <a href="#">Liked Songs</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search for songs, artists, albums...">
+            </div>
+
+            <!-- Featured Playlists -->
+            <h2>Featured Playlists</h2>
+            <div class="featured-playlists">
+                <div class="playlist-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Playlist 1">
+                    <h4>Chill Beats</h4>
+                    <p>Relax and unwind</p>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Playlist 2">
+                    <h4>Top Hits</h4>
+                    <p>Latest chart-toppers</p>
+                </div>
+                <div class="playlist-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Playlist 3">
+                    <h4>Classical Essentials</h4>
+                    <p>Timeless masterpieces</p>
+                </div>
+            </div>
+
+            <!-- Playlist Details -->
+            <div class="playlist-header">
+                <h2>My Playlist</h2>
+                <button>Create Playlist</button>
+            </div>
+
+            <ul class="song-list">
+                <li>
+                    <div class="song-info">
+                        <div class="song-title">Blinding Lights</div>
+                        <div class="song-artist">The Weeknd</div>
+                    </div>
+                    <div class="song-duration">3:20</div>
+                </li>
+                <li>
+                    <div class="song-info">
+                        <div class="song-title">Levitating</div>
+                        <div class="song-artist">Dua Lipa</div>
+                    </div>
+                    <div class="song-duration">3:23</div>
+                </li>
+                <li>
+                    <div class="song-info">
+                        <div class="song-title">Good 4 U</div>
+                        <div class="song-artist">Olivia Rodrigo</div>
+                    </div>
+                    <div class="song-duration">2:58</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Now Playing Bar -->
+    <div class="now-playing">
+        <img src="https://via.placeholder.com/50x50" alt="Now Playing">
+        <div class="song-info">
+            <h5>Levitating</h5>
+            <p>Dua Lipa</p>
+        </div>
+        <div class="controls">
+            <button>⏮️</button>
+            <button>⏯️</button>
+            <button>⏭️</button>
+        </div>
+    </div>
+
+    <script>
+        // Add basic interactivity if needed (e.g., play/pause, etc.)
+    </script>
+</body>
+</html>
