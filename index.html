@@ -1,98 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1DB954">
-    <title>Spotify Clone</title>
-    <link rel="icon" href="https://via.placeholder.com/50x50">
-    <link rel="apple-touch-icon" href="https://via.placeholder.com/180x180">
-    <link rel="manifest" href="manifest.json">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #121212; color: white; display: flex; flex-direction: column; height: 100vh; }
-        .container { flex-grow: 1; display: flex; flex-direction: column; padding: 20px; overflow-y: auto; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #181818; display: flex; justify-content: space-around; padding: 15px 0; }
-        .nav-bar button { background: none; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; }
-        .nav-bar button:hover { color: white; }
-        .section { display: none; }
-        .active { display: block; }
-        .search-bar input { width: 100%; padding: 15px; background: #333; border: none; border-radius: 25px; font-size: 18px; color: white; }
-        .search-bar input:focus { outline: none; border: 1px solid #1DB954; }
-        .playlist-card { background: #333; padding: 15px; margin: 10px 0; border-radius: 10px; cursor: pointer; }
-        .now-playing { position: fixed; bottom: 50px; left: 0; width: 100%; background: #181818; padding: 10px; display: flex; align-items: center; justify-content: space-between; }
-        .now-playing img { width: 40px; height: 40px; border-radius: 5px; }
-        .now-playing .song-info { flex-grow: 1; margin-left: 10px; font-size: 14px; }
-        .now-playing button { background: none; border: none; color: white; font-size: 20px; margin-left: 10px; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-container {
+      width: 400px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    .chat-box {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #fafafa;
+    }
+    .message {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .message .name {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .message .phone {
+      color: #777;
+    }
+    .message .text {
+      margin-left: 10px;
+      background-color: #f1f1f1;
+      padding: 8px;
+      border-radius: 5px;
+      max-width: 75%;
+    }
+    .input-box {
+      display: flex;
+      gap: 10px;
+    }
+    .input-box input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 1em;
+    }
+    .input-box button {
+      width: 25%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .input-box button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-
-    <div class="container">
-        <!-- Home Section -->
-        <div id="home" class="section active">
-            <h2>Home</h2>
-            <div class="playlist-card">Top 50 Global</div>
-            <div class="playlist-card">Workout Jams</div>
-            <div class="playlist-card">Relax & Chill</div>
-        </div>
-
-        <!-- Search Section -->
-        <div id="search" class="section">
-            <h2>Search</h2>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for songs...">
-            </div>
-        </div>
-
-        <!-- Your Library Section -->
-        <div id="library" class="section">
-            <h2>Your Library</h2>
-            <div class="playlist-card">Liked Songs</div>
-            <div class="playlist-card">Chill Vibes</div>
-        </div>
-
-        <!-- Create Playlist Section -->
-        <div id="playlist" class="section">
-            <h2>Create Playlist</h2>
-            <p>Feature coming soon...</p>
-        </div>
+  <div class="chat-container">
+    <div class="header">Chat with People</div>
+    <div id="chatBox" class="chat-box"></div>
+    <div class="input-box">
+      <input id="messageInput" type="text" placeholder="Type a message..." />
+      <button id="sendMessageBtn">Send</button>
     </div>
+  </div>
 
-    <!-- Now Playing Bar -->
-    <div class="now-playing">
-        <img src="https://via.placeholder.com/40x40" alt="Song">
-        <div class="song-info">
-            <p><strong>Song Name</strong></p>
-            <p>Artist</p>
-        </div>
-        <button>⏮</button>
-        <button>⏯</button>
-        <button>⏭</button>
-    </div>
+  <script>
+    // Simulate a chat database (replace with actual database connection)
+    const messages = [
+      { name: "John", phone: "0712345678", text: "Hello, how are you?" },
+      { name: "Alice", phone: "0712345679", text: "I'm good, thanks!" },
+    ];
 
-    <!-- Navigation Bar -->
-    <div class="nav-bar">
-        <button onclick="switchSection('home')">Home</button>
-        <button onclick="switchSection('search')">Search</button>
-        <button onclick="switchSection('library')">Your Library</button>
-        <button onclick="switchSection('playlist')">Create Playlist</button>
-    </div>
+    // Display messages from the database
+    function displayMessages() {
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = ''; // Clear existing messages
+      messages.forEach((msg) => {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.innerHTML = `
+          <div>
+            <span class="name">${msg.name}</span>
+            <span class="phone">${msg.phone}</span>
+            <div class="text">${msg.text}</div>
+          </div>
+        `;
+        chatBox.appendChild(messageElement);
+      });
+    }
 
-    <script>
-        function switchSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
+    // Send a new message
+    document.getElementById("sendMessageBtn").addEventListener("click", () => {
+      const messageInput = document.getElementById("messageInput");
+      const messageText = messageInput.value.trim();
+      if (messageText) {
+        const newMessage = {
+          name: "You", // Replace with the user's name from the registration
+          phone: "07111111111", // Replace with user's phone number
+          text: messageText,
+        };
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js').then(reg => {
-                console.log('Service Worker registered with scope:', reg.scope);
-            }).catch(err => {
-                console.log('Service Worker registration failed:', err);
-            });
-        }
-    </script>
+        // Push to the "database" (messages array)
+        messages.push(newMessage);
 
+        // Optionally send it to a real backend to store it (use AJAX/fetch)
+        // Example (uncomment and use for real API):
+        /*
+        fetch('YOUR_BACKEND_API_URL', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newMessage),
+        });
+        */
+
+        // Display the new message
+        displayMessages();
+
+        // Clear the input field
+        messageInput.value = '';
+      }
+    });
+
+    // Initialize chat
+    displayMessages();
+  </script>
 </body>
 </html>
